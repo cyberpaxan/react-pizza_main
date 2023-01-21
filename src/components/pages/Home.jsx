@@ -6,23 +6,28 @@ import Skeleton from '../PizzaBlock/Skeleton';
 import Pagination from '../Pagination';
 import { SearchContext } from '../../App';
 
-const Home = () => {
-    const { searchValue } = React.useContext(SearchContext);
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from '../../redux/slices/filterSlice';
 
+const Home = () => {
+    const dispatch = useDispatch();
+    const categoryId = useSelector((state) => state.filter.categoryId);
+    const sortType = useSelector((state) => state.filter.sort.sortProperty);
+
+    const { searchValue } = React.useContext(SearchContext);
     const [items, setItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
-
     const [currentPage, setCurrentPage] = React.useState(1);
-    const [categoryId, setCategoryId] = React.useState(0);
-    const [sortType, setSortType] = React.useState({
-        name: 'популярности',
-        sortProperty: 'rating',
-    });
+
+    const onChangeCategory = (id) => {
+        dispatch(setCategoryId(id));
+    };
+
     React.useEffect(() => {
         setIsLoading(true);
 
-        const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
-        const sortBy = sortType.sortProperty.replace('-', '');
+        const order = sortType.includes('-') ? 'asc' : 'desc';
+        const sortBy = sortType.replace('-', '');
         const category = categoryId > 0 ? `category=${categoryId}` : '';
         const search = searchValue ? `&search=${searchValue}` : '';
 
@@ -50,9 +55,9 @@ const Home = () => {
             <div class='content__top'>
                 <Categories
                     value={categoryId}
-                    onClickCategory={(id) => setCategoryId(id)}
+                    onClickCategory={onChangeCategory}
                 />
-                <Sort value={sortType} onChangeSort={(id) => setSortType(id)} />
+                <Sort />
             </div>
             <h2 class='content__title'>Все пиццы</h2>
             <div class='content__items'>{isLoading ? skeletons : pizzas}</div>
