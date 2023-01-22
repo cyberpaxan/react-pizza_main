@@ -7,21 +7,25 @@ import Pagination from '../Pagination';
 import { SearchContext } from '../../App';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId } from '../../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice';
 import axios from 'axios';
 
 const Home = () => {
     const dispatch = useDispatch();
     const categoryId = useSelector((state) => state.filter.categoryId);
     const sortType = useSelector((state) => state.filter.sort.sortProperty);
+    const currentPage = useSelector((state) => state.filter.currentPage);
 
     const { searchValue } = React.useContext(SearchContext);
     const [items, setItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
-    const [currentPage, setCurrentPage] = React.useState(1);
 
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id));
+    };
+
+    const onChangePage = (number) => {
+        dispatch(setCurrentPage(number));
     };
 
     React.useEffect(() => {
@@ -61,7 +65,7 @@ const Home = () => {
             </div>
             <h2 class='content__title'>Все пиццы</h2>
             <div class='content__items'>{isLoading ? skeletons : pizzas}</div>
-            <Pagination onChangePage={(number) => setCurrentPage(number)} />
+            <Pagination currentPage={currentPage} onChangePage={onChangePage} />
         </div>
     );
 };
