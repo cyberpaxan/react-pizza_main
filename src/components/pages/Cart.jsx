@@ -2,10 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CartItem from '../CartItem';
+import { clearItems } from '../../redux/slices/cartSlice';
+import CartEmpty from '../CartEmpty';
 
-const Cart = ({ id, title, type, price, count, imageUrl }) => {
+const Cart = ({ id }) => {
     const dispatch = useDispatch();
-    const items = useSelector((state) => state.cart.items);
+    const { items, totalPrice } = useSelector((state) => state.cart);
+
+    const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
+    const onClickClear = () => {
+        if (window.confirm('Очистить корзину?')) {
+            dispatch(clearItems(id));
+        }
+    };
+
+    if (!totalPrice) {
+        return <CartEmpty />;
+    }
+
     return (
         <div className='container container--cart'>
             <div class='cart'>
@@ -42,7 +57,7 @@ const Cart = ({ id, title, type, price, count, imageUrl }) => {
                         </svg>
                         Корзина
                     </h2>
-                    <div class='cart__clear'>
+                    <div onClick={onClickClear} class='cart__clear'>
                         <svg
                             width='20'
                             height='20'
@@ -92,13 +107,12 @@ const Cart = ({ id, title, type, price, count, imageUrl }) => {
                     <div class='cart__bottom-details'>
                         <span>
                             {' '}
-                            Всего пицц: <b>
-                                {count > 0 ? { count } : 0} шт.
-                            </b>{' '}
+                            Всего пицц: <b>{totalCount} шт.</b>{' '}
                         </span>
                         <span>
                             {' '}
-                            Сумма заказа: <b>900 ₽</b>{' '}
+                            Сумма заказа:{' '}
+                            <b>{totalPrice > 0 ? totalPrice : 0} ₽</b>{' '}
                         </span>
                     </div>
                     <div class='cart__bottom-buttons'>
