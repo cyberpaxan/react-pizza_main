@@ -14,6 +14,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const categoryId = useSelector((state) => state.filter.categoryId);
     const sortType = useSelector((state) => state.filter.sort.sortProperty);
+    const sort = useSelector((state) => state.filter.sort);
     const currentPage = useSelector((state) => state.filter.currentPage);
 
     const { searchValue } = React.useContext(SearchContext);
@@ -46,7 +47,7 @@ const Home = () => {
             });
 
         window.scrollTo(0, 0);
-    }, [categoryId, sortType, searchValue, currentPage]);
+    }, [categoryId, sort, searchValue, currentPage]);
 
     const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
