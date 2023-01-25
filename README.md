@@ -1,4 +1,4 @@
-**This is my first big pet-project for practice on ReactJS. It's a clone of one famous Pizza store.**
+**This is my first big pet-project for practice ReactJS. It's a clone of one famous Pizza store.**
 
 Here you can see this project's stack:
 - **ReactJS 18**
