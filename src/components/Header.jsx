@@ -21,6 +21,7 @@ function Header({ searchValue, setSearchValue }) {
                         </div>
                     </div>
                 </Link>
+
                 <Search
                     searchValue={searchValue}
                     setSearchValue={setSearchValue}

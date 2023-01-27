@@ -6,6 +6,7 @@ import Header from './components/Header';
 import { Routes, Route } from 'react-router-dom';
 import NotFoundBlock from './components/NotFoundBlock';
 import Cart from './components/pages/Cart';
+import FullPizza from './components/pages/FullPizza';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <div class='content'>
                 <Routes>
                     <Route path='/' element={<Home />} />
+                    <Route path='/pizza/:id' element={<FullPizza />} />
                     <Route path='/cart' element={<Cart />} />
                     <Route path='*' element={<NotFoundBlock />} />
                 </Routes>
