@@ -2,11 +2,10 @@ import React from 'react';
 import './App.css';
 import './scss/app.scss';
 import Home from '../src/components/pages/Home';
-import Header from './components/Header';
 import { Routes, Route } from 'react-router-dom';
 import NotFoundBlock from './components/NotFoundBlock';
 import Cart from './components/pages/Cart';
-import FullPizza from './components/pages/FullPizza';
+import FullPizza from './components/FullPizza/FullPizza';
 import MainLayout from './layouts/MainLayout';
 
 function App() {
