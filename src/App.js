@@ -7,20 +7,18 @@ import { Routes, Route } from 'react-router-dom';
 import NotFoundBlock from './components/NotFoundBlock';
 import Cart from './components/pages/Cart';
 import FullPizza from './components/pages/FullPizza';
+import MainLayout from './layouts/MainLayout';
 
 function App() {
     return (
-        <div class='wrapper'>
-            <Header />
-            <div class='content'>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/pizza/:id' element={<FullPizza />} />
-                    <Route path='/cart' element={<Cart />} />
-                    <Route path='*' element={<NotFoundBlock />} />
-                </Routes>
-            </div>
-        </div>
+        <Routes>
+            <Route path='/' element={<MainLayout />}>
+                <Route path='' element={<Home />} />
+                <Route path='pizza/:id' element={<FullPizza />} />
+                <Route path='cart' element={<Cart />} />
+                <Route path='*' element={<NotFoundBlock />} />
+            </Route>
+        </Routes>
     );
 }
 

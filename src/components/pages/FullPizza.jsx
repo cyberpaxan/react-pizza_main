@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const FullPizza = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [pizza, setPizza] = React.useState();
 
     React.useEffect(() => {
@@ -14,7 +15,8 @@ const FullPizza = () => {
                 );
                 setPizza(data);
             } catch (error) {
-                console.log(error);
+                alert('Не удалось загрузить страницу!');
+                navigate('/');
             }
         }
         fetchPizza();
@@ -26,7 +28,7 @@ const FullPizza = () => {
 
     return (
         <div className='container'>
-            <img src={pizza.imageUrl} />
+            <img src={pizza.imageUrl} alt='pizza' />
             <h2>{pizza.title}</h2>
             <h4>{pizza.price}</h4>
         </div>
