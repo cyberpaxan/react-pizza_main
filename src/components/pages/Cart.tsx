@@ -5,15 +5,18 @@ import CartItem from '../CartItem';
 import { clearItems, selectCart } from '../../redux/slices/cartSlice';
 import CartEmpty from '../CartEmpty';
 
-const Cart: React.FC = ({ id }) => {
+const Cart: React.FC = () => {
     const dispatch = useDispatch();
     const { items, totalPrice } = useSelector(selectCart);
 
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+    const totalCount = items.reduce(
+        (sum: number, item: any) => sum + item.count,
+        0
+    );
 
     const onClickClear = () => {
         if (window.confirm('Очистить корзину?')) {
-            dispatch(clearItems(id));
+            dispatch(clearItems());
         }
     };
 
@@ -99,20 +102,18 @@ const Cart: React.FC = ({ id }) => {
                     </div>
                 </div>
                 <div className='content__items'>
-                    {items.map((item) => (
+                    {items.map((item: any) => (
                         <CartItem key={item.id} {...item} />
                     ))}
                 </div>
                 <div className='cart__bottom'>
                     <div className='cart__bottom-details'>
                         <span>
-                            {' '}
-                            Всего пицц: <b>{totalCount} шт.</b>{' '}
+                            Всего пицц: <b>{totalCount} шт.</b>
                         </span>
                         <span>
-                            {' '}
-                            Сумма заказа:{' '}
-                            <b>{totalPrice > 0 ? totalPrice : 0} ₽</b>{' '}
+                            Сумма заказа:
+                            <b>{totalPrice > 0 ? totalPrice : 0} ₽</b>
                         </span>
                     </div>
                     <div className='cart__bottom-buttons'>

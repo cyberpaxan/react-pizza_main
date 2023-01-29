@@ -11,22 +11,22 @@ import {
     selectFilter,
     setCategoryId,
     setCurrentPage,
+    sortTypeState,
 } from '../../redux/slices/filterSlice';
 
-const Home = () => {
+const Home: React.FC = () => {
     const dispatch = useDispatch();
 
-    const sortType = useSelector((state) => state.filter.sort.sortProperty);
-    const items = useSelector((state) => state.pizza.items);
-    const { status } = useSelector(selectPizzaData);
+    const sortType = useSelector(sortTypeState);
+    const { status, items } = useSelector(selectPizzaData);
     const { categoryId, sort, currentPage, searchValue } =
         useSelector(selectFilter);
 
-    const onChangeCategory = (id) => {
+    const onChangeCategory = (id: number) => {
         dispatch(setCategoryId(id));
     };
 
-    const onChangePage = (number) => {
+    const onChangePage = (number: number) => {
         dispatch(setCurrentPage(number));
     };
 
@@ -38,6 +38,7 @@ const Home = () => {
 
         try {
             dispatch(
+                // @ts-ignore
                 fetchPizzas({ order, sortBy, category, search, currentPage })
             );
         } catch (error) {
@@ -47,22 +48,24 @@ const Home = () => {
         window.scrollTo(0, 0);
     }, [categoryId, sort, searchValue, currentPage]);
 
-    const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+    const pizzas = items.map((obj: any) => (
+        <PizzaBlock key={obj.id} {...obj} />
+    ));
 
     const skeletons = [...new Array(6)].map((_, index) => (
         <Skeleton key={index} />
     ));
 
     return (
-        <div class='container'>
-            <div class='content__top'>
+        <div className='container'>
+            <div className='content__top'>
                 <Categories
                     value={categoryId}
                     onClickCategory={onChangeCategory}
                 />
                 <Sort />
             </div>
-            <h2 class='content__title'>Все пиццы</h2>
+            <h2 className='content__title'>Все пиццы</h2>
             {status === 'error' ? (
                 <div className='content__error-info'>
                     <h1>Произошла ошибка ❗</h1>
@@ -72,7 +75,7 @@ const Home = () => {
                     </p>
                 </div>
             ) : (
-                <div class='content__items'>
+                <div className='content__items'>
                     {status === 'loading' ? skeletons : pizzas}
                 </div>
             )}
