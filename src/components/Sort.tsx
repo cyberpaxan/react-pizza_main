@@ -2,7 +2,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortType, selectSort } from '../redux/slices/filterSlice';
 
-const list = [
+type SortItem = {
+    name: string;
+    sortProperty: string;
+};
+
+export const sortList: SortItem[] = [
     { name: 'популярности (по убыванию)', sortProperty: 'rating' },
     { name: 'популярности (по возрастанию)', sortProperty: '-rating' },
     { name: 'цене (по убыванию)', sortProperty: 'price' },
@@ -12,19 +17,19 @@ const list = [
 ];
 
 function Sort() {
-    const sortRef = React.useRef();
+    const sortRef = React.useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
     const sort = useSelector(selectSort);
 
     const [open, setOpen] = React.useState(false);
 
-    const onListClickItem = (obj) => {
+    const onListClickItem = (obj: SortItem) => {
         dispatch(setSortType(obj));
         setOpen(false);
     };
 
     React.useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: any) => {
             const path = event.composedPath().includes(sortRef.current);
             if (!path) {
                 setOpen(false);
@@ -38,8 +43,8 @@ function Sort() {
     }, []);
 
     return (
-        <div ref={sortRef} class='sort'>
-            <div class='sort__label'>
+        <div ref={sortRef} className='sort'>
+            <div className='sort__label'>
                 <svg
                     width='10'
                     height='6'
@@ -56,9 +61,9 @@ function Sort() {
                 <span onClick={() => setOpen(!open)}>{sort.name}</span>
             </div>
             {open && (
-                <div class='sort__popup'>
+                <div className='sort__popup'>
                     <ul>
-                        {list.map((obj, i) => (
+                        {sortList.map((obj, i) => (
                             <li
                                 key={i}
                                 onClick={() => onListClickItem(obj)}

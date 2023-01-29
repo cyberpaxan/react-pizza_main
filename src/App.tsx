@@ -1,7 +1,6 @@
-import React from 'react';
 import './App.css';
 import './scss/app.scss';
-import Home from '../src/components/pages/Home';
+import Home from './components/pages/Home';
 import { Routes, Route } from 'react-router-dom';
 import NotFoundBlock from './components/NotFoundBlock';
 import Cart from './components/pages/Cart';
