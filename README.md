@@ -3,14 +3,14 @@
 Here you can see this project's stack:
 - **ReactJS 18**
 - **TypeScript**
-- **Redux Toolkit** (хранение данных / пицц)
-- **React Router v6** (навигация)
-- **Axios + Fetch** (отправка запроса на бэкенд)
-- React Hooks (хуки)
-- Prettier (форматирование кода)
-- CSS-Modules / SCSS (стилизация)
-- React Content Loader (скелетон)
-- React Pagination (пагинация)
+- **Redux Toolkit** (store data/pizzas)
+- **React Router v6** (navigation)
+- **Axios + Fetch** (fetch requests to backend)
+- React Hooks (hooks)
+- Prettier (code formatting)
+- CSS-Modules / SCSS (styling)
+- React Content Loader (skeletons)
+- React Pagination (pagination)
 - Lodash.Debounce
 - Code Splitting, React Loadable, useWhyDidYouUpdate
 
