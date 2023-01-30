@@ -32,9 +32,12 @@ const cartSlice = createSlice({
 
             if (findItem) {
                 findItem.count--;
+                state.totalPrice = state.totalPrice - findItem.price;
             }
             if (findItem.count === 0) {
-                findItem.count++;
+                state.items = state.items.filter(
+                    (obj) => obj.id !== action.payload
+                );
             }
         },
 
@@ -43,7 +46,7 @@ const cartSlice = createSlice({
                 (obj) => obj.id !== action.payload
             ));
             const arr = [];
-            delItem.forEach((value) => arr.push(value.price));
+            delItem.forEach((value) => arr.push(value.price * value.count));
             const sum = arr.reduce((acc, number) => acc + number, 0);
             state.totalPrice = state.totalPrice - (state.totalPrice - sum);
         },
