@@ -61,7 +61,7 @@ const Home: React.FC = () => {
             <div className='content__top'>
                 <Categories
                     value={categoryId}
-                    onClickCategory={onChangeCategory}
+                    onChangeCategory={onChangeCategory}
                 />
                 <Sort />
             </div>

@@ -112,7 +112,7 @@ const Cart: React.FC = () => {
                             Всего пицц: <b>{totalCount} шт.</b>
                         </span>
                         <span>
-                            Сумма заказа:
+                            Сумма заказа:{' '}
                             <b>{totalPrice > 0 ? totalPrice : 0} ₽</b>
                         </span>
                     </div>
