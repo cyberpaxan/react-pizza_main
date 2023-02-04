@@ -17,7 +17,6 @@ const categories = [
 
 const Categories: React.FC<CategoriesProps> = React.memo(
     ({ value, onChangeCategory }) => {
-        useWhyDidYouUpdate('Categories', { value, onChangeCategory });
         return (
             <div className='categories'>
                 <ul>

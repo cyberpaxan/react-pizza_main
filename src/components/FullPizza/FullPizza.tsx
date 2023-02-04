@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './FullPizza.module.scss';
-console.log(styles);
 const FullPizza: React.FC = () => {
     const { id } = useParams();
     const navigate = useNavigate();
