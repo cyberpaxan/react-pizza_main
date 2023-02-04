@@ -1,15 +1,16 @@
+import useWhyDidYouUpdate from 'ahooks/lib/useWhyDidYouUpdate';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setSortType, selectSort } from '../redux/slices/filterSlice';
+import { useDispatch } from 'react-redux';
+import { setSortType } from '../redux/slices/filterSlice';
 
 type SortItem = {
     name: string;
     sortProperty: string;
 };
 
-// type PopupClick = React.MouseEvent<HTMLBodyElement> & {
-//     composedPath(): Node[];
-// };
+type SortPopupProps = {
+    value: SortItem;
+};
 
 export const sortList: SortItem[] = [
     { name: 'популярности (по убыванию)', sortProperty: 'rating' },
@@ -20,11 +21,9 @@ export const sortList: SortItem[] = [
     { name: 'алфавиту (по возрастанию)', sortProperty: '-title' },
 ];
 
-function Sort() {
+const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
     const sortRef = React.useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
-    const sort = useSelector(selectSort);
-
     const [open, setOpen] = React.useState(false);
 
     const onListClickItem = (obj: SortItem) => {
@@ -64,7 +63,7 @@ function Sort() {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setOpen(!open)}>{sort.name}</span>
+                <span onClick={() => setOpen(!open)}>{value.name}</span>
             </div>
             {open && (
                 <div className='sort__popup'>
@@ -74,7 +73,7 @@ function Sort() {
                                 key={i}
                                 onClick={() => onListClickItem(obj)}
                                 className={
-                                    sort.sortProperty === obj.sortProperty
+                                    value.sortProperty === obj.sortProperty
                                         ? 'active'
                                         : ''
                                 }
@@ -87,6 +86,6 @@ function Sort() {
             )}
         </div>
     );
-}
+});
 
-export default Sort;
+export default SortPopup;

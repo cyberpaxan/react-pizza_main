@@ -1,7 +1,7 @@
 import React from 'react';
 import Categories from '../Categories';
-import Sort from '../Sort';
 import PizzaBlock from '../PizzaBlock/index';
+import SortPopup from '../Sort';
 import Skeleton from '../PizzaBlock/Skeleton';
 import Pagination from '../Pagination';
 
@@ -17,15 +17,14 @@ import { useAppDispatch } from '../../redux/store';
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
-
     const sortType = useSelector(sortTypeState);
     const { status, items } = useSelector(selectPizzaData);
     const { categoryId, sort, currentPage, searchValue } =
         useSelector(selectFilter);
 
-    const onChangeCategory = (id: number) => {
+    const onChangeCategory = React.useCallback((id: number) => {
         dispatch(setCategoryId(id));
-    };
+    }, []);
 
     const onChangePage = (number: number) => {
         dispatch(setCurrentPage(number));
@@ -69,7 +68,7 @@ const Home: React.FC = () => {
                     value={categoryId}
                     onChangeCategory={onChangeCategory}
                 />
-                <Sort />
+                <SortPopup value={sort} />
             </div>
             <h2 className='content__title'>Все пиццы</h2>
             {status === 'error' ? (
