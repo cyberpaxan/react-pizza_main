@@ -14,12 +14,18 @@
 
             .header__cart {
                 margin-top: 20px;
+                @media (max-width: 645px) {
+                    margin: 30px;
+                }
             }
         }
     }
 
     &__logo {
         display: flex;
+        @media (max-width: 645px) {
+            margin: 30px;
+        }
 
         img {
             margin-right: 15px;
