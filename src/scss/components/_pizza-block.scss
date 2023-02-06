@@ -9,7 +9,7 @@
     display: inline-block;
     justify-content: center;
     @media (max-width: 645px) {
-        margin-left: 35px;
+        margin-left: 10px;
     }
 
     &:hover {
@@ -27,6 +27,7 @@
 
     &__image {
         width: 260px;
+        margin-left: 5px;
     }
 
     &__title {
