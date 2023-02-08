@@ -32,7 +32,10 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
     const [activeType, setActiveType] = React.useState(0);
     const [activeSize, setActiveSize] = React.useState(0);
 
-    const typeNames = ['тонкое', 'традиционное'];
+    const typeNames: string[] = ['тонкое', 'традиционное'];
+
+    const priceFilter =
+        activeType === 0 ? price * (activeSize + 1) : price * (activeSize + 2);
 
     const onClickAdd = () => {
         const item: CartItem = {
@@ -85,7 +88,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
                     </ul>
                 </div>
                 <div className='pizza-block__bottom'>
-                    <div className='pizza-block__price'>от {price} ₽</div>
+                    <div className='pizza-block__price'>{priceFilter}₽</div>
                     <button
                         onClick={onClickAdd}
                         className='button button--outline button--add'

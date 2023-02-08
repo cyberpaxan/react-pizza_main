@@ -112,6 +112,8 @@ body {
 
     .content__items {
         display: block;
+        @media (max-width: 900px) {
+        }
     }
 
     .content__title {
