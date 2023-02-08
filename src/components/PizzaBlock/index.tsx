@@ -15,6 +15,7 @@ type PizzaBlockProps = {
     sizes: number[];
     types: number[];
     rating: number;
+    priceFilter: number;
 };
 
 const PizzaBlock: React.FC<PizzaBlockProps> = ({
@@ -37,11 +38,13 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
     const priceFilter =
         activeType === 0 ? price * (activeSize + 1) : price * (activeSize + 2);
 
+    console.log(priceFilter);
+
     const onClickAdd = () => {
         const item: CartItem = {
             id,
             title,
-            price,
+            price: priceFilter,
             imageUrl,
             type: typeNames[activeType],
             size: sizes[activeSize],
